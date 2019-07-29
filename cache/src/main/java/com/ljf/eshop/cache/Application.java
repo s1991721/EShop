@@ -1,5 +1,6 @@
 package com.ljf.eshop.cache;
 
+import com.ljf.eshop.cache.listener.InitListener;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -76,6 +77,19 @@ public class Application {
         jedisClusterNodes.add(new HostAndPort("10.2.27.144", 7003));
         jedisClusterNodes.add(new HostAndPort("10.2.26.232", 7005));
         return new JedisCluster(jedisClusterNodes);
+    }
+
+
+    /**
+     * 注册监听器，监听系统启动
+     *
+     * @return
+     */
+    @Bean
+    public ServletListenerRegistrationBean servletListenerRegistrationBean() {
+        ServletListenerRegistrationBean servletListenerRegistrationBean = new ServletListenerRegistrationBean();
+        servletListenerRegistrationBean.setListener(new InitListener());
+        return servletListenerRegistrationBean;
     }
 
 }
