@@ -42,7 +42,7 @@ public class KafkaConsumer implements Runnable {
         Properties properties = new Properties();
         properties.put("zookeeper.connect", "10.2.25.209:2181,10.2.27.144:2181,10.2.26.232:2181");
         properties.put("group.id", "eshop-cache-group");
-        properties.put("zookeeper.session.timeout.ms", "400");
+        properties.put("zookeeper.session.timeout.ms", "40000");
         properties.put("zookeeper.sync.time.ms", "200");
         properties.put("auto.commit.interval.ms", "1000");
         return new ConsumerConfig(properties);
