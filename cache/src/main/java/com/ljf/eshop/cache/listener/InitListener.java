@@ -1,6 +1,7 @@
 package com.ljf.eshop.cache.listener;
 
 import com.ljf.eshop.cache.kafka.KafkaConsumer;
+import com.ljf.eshop.cache.rebuild.RebuildCacheThread;
 import com.ljf.eshop.cache.spring.SpringContext;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
@@ -22,6 +23,7 @@ public class InitListener implements ServletContextListener {
         SpringContext.setApplicationContext(applicationContext);
 
         new Thread(new KafkaConsumer("cache-message")).start();
+        new Thread(new RebuildCacheThread()).start();
     }
 
     @Override
